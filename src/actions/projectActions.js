@@ -1,10 +1,9 @@
 import axios from "axios";
 import { GET_ERRORS, GET_PROJECTS, GET_PROJECT, DELETE_PROJECT } from "./types";
-import Dashboard from "../components/Dashboard";
 
 export const createProject = (project, history) => async dispatch => {
   try {
-    const res = await axios.post("/api/project", project);
+    await axios.post("/api/project", project);
     history.push("/dashboard");
     dispatch({
       type: GET_ERRORS,
