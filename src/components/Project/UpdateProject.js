@@ -3,6 +3,7 @@ import { getProject, createProject } from "../../actions/projectActions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import classnames from "classnames";
+import { Link } from "react-router-dom";
 
 class UpdateProject extends Component {
   //set state
@@ -76,6 +77,17 @@ class UpdateProject extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
+              <nav aria-label="breadcrumb">
+                <ol className="breadcrumb">
+                  <li className="breadcrumb-item">
+                    <Link to="/dashboard">DashBoard</Link>
+                  </li>
+                  <li className="breadcrumb-item active" aria-current="page">
+                    {this.state.projectIdentifier}
+                  </li>
+                </ol>
+              </nav>
+
               <h5 className="display-4 text-center">Update Project form</h5>
               <hr />
               <form onSubmit={this.onSubmit}>

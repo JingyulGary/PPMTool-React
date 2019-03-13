@@ -56,4 +56,5 @@ export const logout = () => dispatch => {
     type: SET_CURRENT_USER,
     payload: {}
   });
+  window.location.href = "/";
 };

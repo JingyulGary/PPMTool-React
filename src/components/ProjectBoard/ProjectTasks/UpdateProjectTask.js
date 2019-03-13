@@ -97,12 +97,22 @@ class UpdateProjectTask extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              <Link
-                to={`/projectBoard/${this.state.projectIdentifier}`}
-                className="btn btn-light"
-              >
-                Back to Project Board
-              </Link>
+              <nav aria-label="breadcrumb">
+                <ol className="breadcrumb">
+                  <li className="breadcrumb-item">
+                    <Link to="/dashboard">DashBoard</Link>
+                  </li>
+                  <li className="breadcrumb-item">
+                    <Link to={`/projectBoard/${this.state.projectIdentifier}`}>
+                      {this.state.projectIdentifier}
+                    </Link>
+                  </li>
+                  <li className="breadcrumb-item active" aria-current="page">
+                    {this.state.projectSequence}
+                  </li>
+                </ol>
+              </nav>
+
               <h4 className="display-4 text-center">Update Project Task</h4>
               <p className="lead text-center">
                 Project Name: {this.state.projectIdentifier} | Project Task ID:{" "}

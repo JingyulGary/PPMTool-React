@@ -8,14 +8,20 @@ class ProjectTask extends Component {
   onDeleteClick(backlog_id, pt_id) {
     this.props.deleteProjectTask(backlog_id, pt_id);
   }
+
+  onDragStart(e, pt) {
+    e.dataTransfer.setData("pt_id", pt.projectSequence);
+    e.dataTransfer.setData("bl_id", pt.projectIdentifier);
+  }
+
   render() {
     const { project_task } = this.props;
     let priorityString;
     let priorityClass;
 
-    if (project_task.priority === 1) {
-      priorityClass = "bg-danger text-light";
-      priorityString = "HIGH";
+    if (project_task.priority === 3) {
+      priorityClass = "bg-info text-light";
+      priorityString = "LOW";
     }
 
     if (project_task.priority === 2) {
@@ -23,13 +29,16 @@ class ProjectTask extends Component {
       priorityString = "MEDIUM";
     }
 
-    if (project_task.priority === 3) {
-      priorityClass = "bg-info text-light";
-      priorityString = "LOW";
+    if (project_task.priority === 1) {
+      priorityClass = "bg-danger text-light";
+      priorityString = "HIGH";
     }
-
     return (
-      <div className="card mb-1 bg-light">
+      <div
+        draggable
+        onDragStart={e => this.onDragStart(e, project_task)}
+        className="card mb-1 bg-light"
+      >
         <div className={`card-header text-primary ${priorityClass}`}>
           ID: {project_task.projectSequence} -- Priority: {priorityString}
         </div>
@@ -37,6 +46,9 @@ class ProjectTask extends Component {
           <h5 className="card-title">{project_task.summary}</h5>
           <p className="card-text text-truncate ">
             {project_task.acceptanceCriteria}
+          </p>
+          <p className="card-text text-muted">
+            Due Date: {project_task.dueDate}
           </p>
           <Link
             to={`/updateProjectTask/${project_task.projectIdentifier}/${
